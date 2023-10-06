@@ -27,8 +27,8 @@ client.on('ready', () => {
 });
 
 const send_message = [
-    "919949108434",
-    "919014495417"
+    "91",
+    "91
 ]
 
 client.on("ready", async () => {
