@@ -28,19 +28,32 @@ client.on('ready', () => {
 
 const send_message = [
     "91",
-    "91
+    "91"
 ]
 
 client.on("ready", async () => {
     console.log("Sending");
 
+    let successfulCount = 0;
+    let unsuccessfulCount = 0;
+
     for (const value of send_message) {
         const chatId = value + "@c.us";
         const media = await MessageMedia.fromUrl('https://www.rudraksha-ratna.com/uploads/files/0030483632.jpg');
 
-        await client.sendMessage(chatId, media);
-        console.log("Sent");
+        try {
+            await client.sendMessage(chatId, media);
+            successfulCount++;
+            console.log(`Message sent to ${chatId}`);
+        } catch (error) {
+            unsuccessfulCount++;
+            console.error(`Failed to send message to ${chatId}: ${error}`);
+        }
     }
+
+    console.log(`Total messages sent successfully: ${successfulCount}`);
+    console.log(`Total messages failed to send: ${unsuccessfulCount}`);
 });
+
 
 client.initialize();
